@@ -1,0 +1,3 @@
+[submodule "plugins/url_control"]
+	path = plugins/url_control
+	url = https://github.com/tbaddade/redaxo_plugin_url_control
