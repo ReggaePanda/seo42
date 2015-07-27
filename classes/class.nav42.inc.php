@@ -523,6 +523,8 @@ class nav42 {
 
 					if (intval($id) === $REX['ARTICLE_ID']) {
 						$html .= $articleName;
+					} elseif ($article->getUrl() == '/' && $article->getId() != $REX['START_ARTICLE_ID']) {
+						$html .= '<a href="javascript:void(0)">' . $articleName . '</a>';
 					} else {
 						$html .= '<a href="' . $article->getUrl() . '">' . $articleName . '</a>';
 					}
