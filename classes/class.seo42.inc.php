@@ -365,6 +365,10 @@ class seo42 {
 	public static function getArticleValue($key) {
 		return self::$curArticle->getValue($key);
 	}
+
+	public static function setArticleValue($key, $value) {
+		self::$curArticle->$key = $value;
+	}
 	
 	public static function getWebsiteName() {
 		return self::$websiteName;
