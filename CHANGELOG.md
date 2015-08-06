@@ -1,11 +1,25 @@
 SEO42 - Changelog
 =================
 
-### Version 4.1.3 DEV
+### Version 4.2.1 DEV
+
+* Verbessert: Beim DB Import wird nun auch auf die neuen Redirects Felder geprüft
+
+### Version 4.2.0 - 31. Juli 2015
 
 * Fixed #175: Bei mehrsprachigen Websites wurde der 404 Artikel nicht angezeigt wenn die `clang` IDs nicht durchgehend nummeriert waren, thx@GeForce92
 * Fixed #174: nav42: Breadcrumb Navigation zeigt jetzt keine offline Artikel mehr an
+* Fixed: Die Seite eines Plugins wurden nicht automatisch angezeigt im Menü
+* Fixed: Offline Startartikel einer anderen Sprache wie der Default Sprache werden nun nicht mehr angezeigt in der `sitemap.xml`
+* Neu: Sync Redirects: Es wird automatisch ein Redirect angelegt wenn sich eine Url geändert hat
+* Neu: Redirects können nun automatisch ablaufen wenn man eine Ablaufzeit in Tagen in den Einstellungen angibt
+* Neu: Kompakte Ansicht für die Redirects Seite über Einstellungen > User Interface einstellbar. Nützlich bei sehr langen Urls.
+* Neu: EP's `SEO42_URL_UPDATE` und `SEO42_URL_UPDATED` hinzugefügt. Wird getriggert wenn die URL über die URL-Seite in der Artikelansicht geändert wurde
 * Neu: FAQ Eintrag (+ Startguide und Readme) hinzugefügt: "Auf meinem 1und1 Server werden die Image Manager Bilder nicht gecachet sonder jedesmal neu heruntergeladen?!" 
+* Neu: RegEx Redirect Beispiel in die Readme aufgenommen
+* Neu: Erklärung zu allen Redirects Varianten in die Readme aufgenommen
+* Verbessert: Bei den One Domain Only Redirects wurde der Hinweis mit aufgenommen dass WWW/Nicht-WWW Weiterleitungen hier automatisch mit inkludiert sind ;)
+* Verbessert: Setup Schritt 4 hinzugefügt mit Links zum Hilfe-Bereich
 
 ### Version 4.1.2 - 04. Mai 2015
 

@@ -6,7 +6,7 @@ $ctype = rex_request('ctype');
 $doDataUpdate = true;
 $dataUpdated = false;
 
-if (rex_post('save_data', 'boolean')) {
+if (rex_post('save_url_data', 'boolean')) {
 	$newUrlType = rex_post('url_type', 'int');
 
 	$newUrlData['url_type'] = $newUrlType;
@@ -97,11 +97,31 @@ if (rex_post('save_data', 'boolean')) {
 		// info msg
 		echo rex_info($I18N->msg('seo42_urlpage_updated'));
 
+		// extension point 1
+		$params = array();
+		$params['id'] = $articleId;
+		$params['url_type'] = $newUrlType;
+
+		if ($newUrlData['url_clone']) {
+			foreach ($REX['CLANG'] as $clang => $clang_name) {
+				$params['clang'] = $clang;
+
+				rex_register_extension_point('SEO42_URL_UPDATE', '', $params);
+			}
+		} else {
+			$params['clang'] = $clang;
+
+			rex_register_extension_point('SEO42_URL_UPDATE', '', $params);
+		}
+
 		// generate stuff new
 		rex_deleteCacheArticleContent($articleId, $clang);
 		rex_generateArticle($articleId);
 		seo42_generate_pathlist(array());
 
+		// extension point 2
+		rex_register_extension_point('SEO42_URL_UPDATED', '', $params);
+		
 		 // this is for frontend link fix with js
 		$dataUpdated = true;
 	} else {
@@ -370,7 +390,7 @@ if ($urlField != '') {
 					<div class="rex-form-wrapper">
 						<div class="rex-form-row">
 							<p class="rex-form-col-a rex-form-submit">
-								<input type="submit" value="<?php echo $I18N->msg('seo42_urlpage_button_text'); ?>" name="save_data" class="rex-form-submit" />
+								<input type="submit" value="<?php echo $I18N->msg('seo42_urlpage_button_text'); ?>" name="save_url_data" class="rex-form-submit" />
 								<br/><br/>
 							</p>
 						</div>

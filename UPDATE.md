@@ -1,6 +1,10 @@
 SEO42 - Updatehinweise
 ======================
 
+### Version 4.2.0
+
+* Datenbank-Felder wurden geändert. Addon bitte reinstallieren (NICHT deinstallieren und neu installieren!) wenn Update nicht über den Installer gemacht wurde.
+
 ### Version 4.1.0
 
 * Die mitgelieferte `.htaccess` Datei hat sich geändert. Bitte Setup Schritt 2 wiederholen.

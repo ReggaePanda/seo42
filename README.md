@@ -28,7 +28,7 @@ Features
 * Option um die Indizierung von Seiten durch Suchmaschinen zu verhindern
 * Automatische sowie individuelle Canonical URLs
 * One Domain Only sowie Nicht-WWW zu WWW Umleitung (und umgekehrt) inkl. autom. HTTPS Berücksichtigung.
-* Smart Redirects: Automatische Umleitungen für falsch eingegebene Urls z.B. von Url-Endung `/` nach `.html`
+* 5 verschiedene Redirects Varianten, u.a. Smart Redirects: Automatische Umleitungen für falsch eingegebene Urls z.B. von Url-Endung `/` nach `.html`
 * Force Download Funktionalität inkl. suchmaschinenfreundlicher URLs und Canonical Header (z.B. für PDF Downloads)
 * Google Site Verification Unterstützung ohne dass man noch die Html-Datei uploaden muss
 * Keine Abhängigkeiten zu weiteren Addons wie Textile oder XForm
@@ -93,6 +93,28 @@ Language Presets
 
 * ISO Language Codes: <http://www.w3schools.com/tags/ref_language_codes.asp>
 * Sprach-Sonderzeichen-Tabelle: <http://unicode.e-workers.de/>
+
+RegEx Redirect Beispiel
+-----------------------
+
+Vor der Benutzung nicht vergessen die RegEx Redirects einzuschalten in den "Einstellungen".
+
+* Alte Url: `/kategorie/artikel_*`
+* Neue Url: `/kategorie/artikel-{1}.html`
+
+Folgende Urls werden damit umgeleitet (hier nur 1 Beispiel):
+
+* Von: `/kategorie/artikel_foo`
+* Nach: `/kategorie/artikel-foo.html`
+
+Redirects Varianten
+-------------------
+
+* No Double Content Redirects: Hiermit werden hauptsächlich die WWW/Nicht-WWW Redirects gesteuert
+* Auto Redirects: Für alte REDAXO Urls 
+* Smart Redirects: Für vom Benutzer falsch eingegebene Urls, z.B. wird dann `/foo/` nach `/foo.html` umgeleitet (wenn `.html` als Url-Endung angegeben)
+* Sync Redirects: Beim Umbenennen/Verschieben von Katgeorien/Artikel werden Redirects automatisch angelegt
+* Benutzerdef. Redirects: Von Hand eingetragene Redirects
 
 Hinweise
 --------

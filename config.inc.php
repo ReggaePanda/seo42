@@ -3,7 +3,7 @@
 // register addon
 $REX['ADDON']['rxid']['seo42'] = '0';
 $REX['ADDON']['name']['seo42'] = 'SEO42';
-$REX['ADDON']['version']['seo42'] = '4.1.2';
+$REX['ADDON']['version']['seo42'] = '4.2.1 DEV';
 $REX['ADDON']['author']['seo42'] = 'Markus Staab, Wolfgang Huttegger, Dave Holloway, Jan Kristinus, jdlx, RexDude';
 $REX['ADDON']['supportpage']['seo42'] = 'forum.redaxo.de';
 $REX['ADDON']['perm']['seo42'] = 'seo42[]';
@@ -73,7 +73,10 @@ $REX['ADDON']['seo42']['settings'] = array(
 	'no_double_content_redirects_availability' => SEO42_NO_DOUBLE_CONTENT_REDIRECT_AVAILABILITY_FRONTEND,
 	'auto_redirects' => SEO42_AUTO_REDIRECT_NONE,
 	'smart_redirects' => true,
+	'sync_redirects' => false,
+	'sync_redirects_only_online' => false,
 	'redirects_allow_regex' => false,
+	'redirects_max_age' => 0,
 	'css_dir' => '/resources/css/',
 	'js_dir' => '/resources/js/',
 	'images_dir' => '/resources/images/',
@@ -108,6 +111,7 @@ $REX['ADDON']['seo42']['settings'] = array(
 	'all_url_types' => true,
 	'pagerank_checker' => true,
 	'redirects' => true,
+	'redirects_compact_view' => false,
 	'one_page_mode' => false,
 	'pagerank_checker_unlock' => false,
 	'global_special_chars' => '',
@@ -145,6 +149,11 @@ if (!$REX['REDAXO']) {
 	seo42_utils::redirect();	
 }
 
+// check for expired redirects
+if (seo42_utils::redirectsDoExpire()) {
+	seo42_utils::checkExpiredRedirects();
+}
+
 // init
 if (!$REX['SETUP']) {
 	// auto mod rewrite, but not for redaxo system page
@@ -174,6 +183,13 @@ if ($REX['REDAXO']) {
 		require($REX['INCLUDE_PATH'] . '/addons/seo42/classes/class.google_pagerank_checker.inc.php');
 		echo GooglePageRankChecker::getRank(rex_request('url'));
 		exit;
+	}
+
+	//sync redirects
+	if ($REX['ADDON']['seo42']['settings']['sync_redirects']) {
+		if (rex_request('page') == 'structure' || rex_request('page') == 'content') {
+			rex_register_extension('OUTPUT_FILTER_CACHE', 'seo42_utils::syncRedirects');
+		}
 	}
 
 	// subpages
@@ -207,7 +223,7 @@ if ($REX['REDAXO']) {
 		$plugins = OOPlugin::getAvailablePlugins('seo42');
 
 		for ($i = 0; $i < count($plugins); $i++) {
-            if (file_exists($REX['INCLUDE_PATH'] . '/addons/seo42/plugins/' . $plugins[$i] . '/pages/' . $plugins[$i]) ) {
+            if (file_exists($REX['INCLUDE_PATH'] . '/addons/seo42/plugins/' . $plugins[$i] . '/pages/' . $plugins[$i] . '.inc.php') ) { 
 				$I18N->appendFile($REX['INCLUDE_PATH'] . '/addons/seo42/plugins/' . $plugins[$i] . '/lang/'); // make msg for subpage available at this point 
 				array_push($REX['ADDON']['seo42']['SUBPAGES'], array($plugins[$i], $I18N->msg('seo42_' . $plugins[$i])));
             }

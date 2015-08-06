@@ -31,7 +31,7 @@ class seo42_sitemap
 				}
 
 				// add sitemap block
-				if (($article->isOnline() || $article->getId() == $REX['START_ARTICLE_ID']) && !isset($url['status']) && $hasPermission) {
+				if (($article->isOnline() || ($article->getId() == $REX['START_ARTICLE_ID'] && $article->getClang() == $REX['START_CLANG_ID'])) && !isset($url['status']) && $hasPermission) {
 					$db_articles[$url['id']][$url['clang']] = array('loc'        => rex_getUrl($url['id'], $url['clang']),
 												                   'lastmod'    => date('c', $article->getValue('updatedate')),
 												                   'changefreq' => self::calc_article_changefreq($article->getValue('updatedate'), ''),

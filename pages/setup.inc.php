@@ -212,8 +212,17 @@ if ($func == "do_copy") {
 	<div class="rex-area-content">
 		<p class="info-msg"><?php echo $I18N->msg('seo42_setup_step3_msg1'); ?></p>
 		<div id="code-example1"><?php rex_highlight_string($codeExample); ?></div>
+	</div>
+</div>
 
-		<p class="info-msg last-msg"><?php echo $I18N->msg('seo42_setup_codeexamples'); ?></p>
+<div class="rex-addon-output">
+	<h2 class="rex-hl2"><?php echo $I18N->msg('seo42_setup_step4'); ?></h2>
+	<div class="rex-area-content">
+		<ul>
+			<li><?php echo $I18N->msg('seo42_setup_step4_msg1'); ?></li>
+			<li><?php echo $I18N->msg('seo42_setup_step4_msg2'); ?></li>
+			<li><?php echo $I18N->msg('seo42_setup_step4_msg3'); ?></li>
+		</ul>
 	</div>
 </div>
 

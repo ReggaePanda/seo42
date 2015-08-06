@@ -47,6 +47,9 @@ if (count($error) == 0) {
 		PRIMARY KEY (`id`)
 	);");
 
+	// redirects extras (SEO42 4.2.0+)
+	$sql->setQuery('ALTER TABLE `' . $REX['TABLE_PREFIX'] . 'redirects` ADD `create_date` DATETIME, ADD `expire_date` DATETIME');
+
 	// delete cache
 	rex_generateAll();
 
